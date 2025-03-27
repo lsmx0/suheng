@@ -282,26 +282,69 @@ onMounted(() => {
   z-index: 10;
 }
 
-.social-icon.left .qrcode-container {
-  right: 100%;
-  margin-right: 20px;
+/* 电脑端二维码样式 */
+@media (min-width: 769px) {
+  .social-icon.left .qrcode-container {
+    right: 100%;
+    margin-right: 20px;
+  }
+
+  .social-icon.right .qrcode-container {
+    left: 100%;
+    margin-left: 20px;
+  }
+
+  .qrcode-container.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .qrcode-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 5px;
+    display: block;
+  }
 }
 
-.social-icon.right .qrcode-container {
-  left: 100%;
-  margin-left: 20px;
-}
+/* 手机端二维码样式 */
+@media (max-width: 768px) {
+  .qrcode-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    z-index: 1000;
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+  }
 
-.qrcode-container.show {
-  opacity: 1;
-  visibility: visible;
-}
+  .qrcode-image {
+    width: 180px;
+    height: 180px;
+    border-radius: 5px;
+    display: block;
+  }
 
-.qrcode-image {
-  width: 120px;
-  height: 120px;
-  border-radius: 5px;
-  display: block;
+  /* 遮罩层 */
+  .qrcode-container::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+  }
+
+  .qrcode-container.show {
+    opacity: 1;
+    visibility: visible;
+  }
 }
 
 /* 个人简介部分样式 */
