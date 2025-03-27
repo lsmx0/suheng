@@ -602,47 +602,67 @@ onMounted(() => {
 /* 响应式设计 */
 @media (max-width: 768px) {
   .photo-container {
-    flex-direction: column;
-    gap: 20px;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .photo-wrapper {
+    width: 150px;
+    height: 150px;
+    margin: 0 10px;
   }
 
   .social-icon {
-    position: static;
+    position: relative;
     transform: none;
   }
 
   .social-icon.left,
   .social-icon.right {
-    position: static;
+    position: relative;
   }
 
-  .social-icon.left .qrcode-container {
-    right: auto;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-right: 0;
-    margin-top: 20px;
-  }
-
-  .social-icon.right .qrcode-container {
-    left: 50%;
-    transform: translateX(-50%);
-    margin-left: 0;
-    margin-top: 20px;
+  .icon-wrapper {
+    width: 40px;
+    height: 40px;
+    padding: 8px;
   }
 
   .qrcode-container {
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
+    margin: 0;
+    z-index: 1000;
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
   }
 
-  .photo-wrapper {
+  .qrcode-image {
     width: 200px;
     height: 200px;
   }
-  
+
+  /* 添加遮罩层 */
+  .qrcode-container::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+  }
+
   .name {
     font-size: 32px;
   }
