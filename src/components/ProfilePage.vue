@@ -53,8 +53,8 @@ const socialLinks = ref([
 const showQRCode = ref(null);
 
 // 处理二维码显示
-const handleQRCode = (id) => {
-  showQRCode.value = showQRCode.value === id ? null : id;
+const handleQRCode = (type) => {
+  showQRCode.value = showQRCode.value === type ? null : type;
 };
 
 // 技能列表
@@ -93,9 +93,9 @@ onMounted(() => {
       <div class="photo-container">
         <!-- 左侧QQ -->
         <div class="social-icon left">
-          <div class="icon-wrapper">
+          <div class="icon-wrapper" @click="handleQRCode('qq')">
             <img :src="qqIcon" alt="QQ图标" class="icon-image" />
-            <div class="qrcode-container">
+            <div class="qrcode-container" :class="{ 'show': showQRCode === 'qq' }">
               <img :src="qqQRCode" alt="QQ二维码" class="qrcode-image" />
             </div>
           </div>
@@ -108,9 +108,9 @@ onMounted(() => {
 
         <!-- 右侧微信 -->
         <div class="social-icon right">
-          <div class="icon-wrapper">
+          <div class="icon-wrapper" @click="handleQRCode('weixin')">
             <img :src="weixinIcon" alt="微信图标" class="icon-image" />
-            <div class="qrcode-container">
+            <div class="qrcode-container" :class="{ 'show': showQRCode === 'weixin' }">
               <img :src="weixinQRCode" alt="微信二维码" class="qrcode-image" />
             </div>
           </div>
@@ -292,7 +292,7 @@ onMounted(() => {
   margin-left: 20px;
 }
 
-.icon-wrapper:hover .qrcode-container {
+.qrcode-container.show {
   opacity: 1;
   visibility: visible;
 }
@@ -606,9 +606,36 @@ onMounted(() => {
     gap: 20px;
   }
 
+  .social-icon {
+    position: static;
+    transform: none;
+  }
+
+  .social-icon.left,
+  .social-icon.right {
+    position: static;
+  }
+
+  .social-icon.left .qrcode-container {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-right: 0;
+    margin-top: 20px;
+  }
+
+  .social-icon.right .qrcode-container {
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: 0;
+    margin-top: 20px;
+  }
+
   .qrcode-container {
-    flex-direction: row;
-    gap: 30px;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .photo-wrapper {
