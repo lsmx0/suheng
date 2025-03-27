@@ -601,20 +601,25 @@ onMounted(() => {
 
 /* 响应式设计 */
 @media (max-width: 768px) {
+  .profile-container {
+    padding: 20px 15px;
+  }
+
+  /* 照片部分适配 */
   .photo-container {
     flex-direction: row;
     width: 100%;
     height: auto;
-    padding: 20px;
+    padding: 10px;
     justify-content: center;
     align-items: center;
     gap: 10px;
   }
 
   .photo-wrapper {
-    width: 150px;
-    height: 150px;
-    margin: 0 10px;
+    width: 120px;
+    height: 120px;
+    margin: 0 5px;
   }
 
   .social-icon {
@@ -628,11 +633,12 @@ onMounted(() => {
   }
 
   .icon-wrapper {
-    width: 40px;
-    height: 40px;
-    padding: 8px;
+    width: 35px;
+    height: 35px;
+    padding: 6px;
   }
 
+  /* 二维码弹窗优化 */
   .qrcode-container {
     position: fixed;
     top: 50%;
@@ -647,11 +653,11 @@ onMounted(() => {
   }
 
   .qrcode-image {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
   }
 
-  /* 添加遮罩层 */
+  /* 遮罩层 */
   .qrcode-container::before {
     content: '';
     position: fixed;
@@ -663,39 +669,138 @@ onMounted(() => {
     z-index: -1;
   }
 
+  /* 个人信息部分适配 */
+  .info-section {
+    padding: 0 15px;
+    margin-bottom: 40px;
+  }
+
   .name {
-    font-size: 32px;
+    font-size: 28px;
+    margin-bottom: 5px;
   }
   
   .title {
-    font-size: 20px;
+    font-size: 18px;
+    margin-bottom: 15px;
   }
   
   .description {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+
+  /* 技能展示部分适配 */
+  .skills-container {
+    padding: 20px;
+    margin-top: 30px;
+  }
+
+  .skills-title {
+    font-size: 24px;
+    margin-bottom: 25px;
+  }
+
+  .skill {
+    margin-bottom: 20px;
+    padding: 12px;
+  }
+
+  .skill-name {
     font-size: 16px;
   }
-  
+
+  .skill-level {
+    font-size: 14px;
+    padding: 3px 10px;
+  }
+
+  .skill-bar {
+    height: 10px;
+  }
+
+  /* 个人事迹部分适配 */
+  .achievements-section {
+    padding: 40px 0;
+  }
+
+  .section-title {
+    font-size: 26px;
+    margin-bottom: 30px;
+  }
+
   .timeline-line {
-    left: 30px;
+    left: 20px;
   }
   
   .achievement-card {
-    width: calc(100% - 60px);
-    margin-left: 60px !important;
+    width: calc(100% - 40px);
+    margin-left: 40px !important;
     margin-right: 0 !important;
+    padding: 20px;
   }
   
   .achievement-card.right .achievement-dot,
   .achievement-card.left .achievement-dot {
-    left: -40px;
+    left: -30px;
     right: auto;
+    width: 16px;
+    height: 16px;
+  }
+
+  .achievement-year {
+    font-size: 14px;
+    padding: 4px 12px;
+  }
+
+  .achievement-title {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .achievement-description {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* 页脚适配 */
+  .profile-footer {
+    margin-top: 40px;
+    padding: 15px 0;
+    font-size: 13px;
   }
 }
 
+/* 平板设备适配 */
 @media (min-width: 768px) and (max-width: 1024px) {
+  .profile-container {
+    padding: 30px 20px;
+  }
+
   .photo-wrapper {
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
+  }
+
+  .name {
+    font-size: 36px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .description {
+    font-size: 17px;
+  }
+
+  .skills-container {
+    padding: 30px;
+  }
+
+  .achievement-card {
+    width: calc(50% - 30px);
   }
 }
 </style> 
