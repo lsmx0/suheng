@@ -315,7 +315,7 @@ onMounted(() => {
     left: 50%;
     transform: translate(-50%, -50%);
     margin: 0;
-    z-index: 1000;
+    z-index: 9999;
     background-color: white;
     padding: 15px;
     border-radius: 10px;
@@ -338,7 +338,7 @@ onMounted(() => {
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: -1;
+    z-index: 9998;
   }
 
   .qrcode-container.show {
@@ -688,7 +688,7 @@ onMounted(() => {
     left: 50%;
     transform: translate(-50%, -50%);
     margin: 0;
-    z-index: 1000;
+    z-index: 9999;
     background-color: white;
     padding: 15px;
     border-radius: 10px;
@@ -709,7 +709,7 @@ onMounted(() => {
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: -1;
+    z-index: 9998;
   }
 
   /* 个人信息部分适配 */
