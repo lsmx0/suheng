@@ -95,9 +95,6 @@ onMounted(() => {
         <div class="social-icon left">
           <div class="icon-wrapper" @click="handleQRCode('qq')">
             <img :src="qqIcon" alt="QQ图标" class="icon-image" />
-            <div class="qrcode-container" :class="{ 'show': showQRCode === 'qq' }">
-              <img :src="qqQRCode" alt="QQ二维码" class="qrcode-image" />
-            </div>
           </div>
         </div>
 
@@ -110,13 +107,19 @@ onMounted(() => {
         <div class="social-icon right">
           <div class="icon-wrapper" @click="handleQRCode('weixin')">
             <img :src="weixinIcon" alt="微信图标" class="icon-image" />
-            <div class="qrcode-container" :class="{ 'show': showQRCode === 'weixin' }">
-              <img :src="weixinQRCode" alt="微信二维码" class="qrcode-image" />
-            </div>
           </div>
         </div>
       </div>
     </section>
+    
+    <!-- 二维码弹窗 -->
+    <div v-if="showQRCode" class="qrcode-modal" @click="handleQRCode(null)">
+      <div class="qrcode-container" @click.stop>
+        <img :src="showQRCode === 'qq' ? qqQRCode : weixinQRCode" 
+             :alt="showQRCode === 'qq' ? 'QQ二维码' : '微信二维码'" 
+             class="qrcode-image" />
+      </div>
+    </div>
     
     <!-- 第二部分：个人简介 -->
     <section class="info-section" :class="{ 'visible': infoVisible }">
@@ -268,20 +271,6 @@ onMounted(() => {
   object-fit: contain;
 }
 
-.qrcode-container {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: white;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-  z-index: 10;
-}
-
 /* 电脑端二维码样式 */
 @media (min-width: 769px) {
   .social-icon.left .qrcode-container {
@@ -309,9 +298,7 @@ onMounted(() => {
 
 /* 手机端二维码样式 */
 @media (max-width: 768px) {
-  /* 遮罩层 */
-  .qrcode-container::before {
-    content: '';
+  .qrcode-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -319,19 +306,18 @@ onMounted(() => {
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 9998;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .qrcode-container {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0;
-    z-index: 9999;
+    position: relative;
     background-color: white;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
   }
 
   .qrcode-image {
@@ -339,18 +325,6 @@ onMounted(() => {
     height: 180px;
     border-radius: 5px;
     display: block;
-  }
-
-  .qrcode-container.show {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  /* 确保其他元素不会遮挡二维码 */
-  .photo-wrapper,
-  .social-icon,
-  .icon-wrapper {
-    z-index: 1;
   }
 }
 
@@ -686,37 +660,6 @@ onMounted(() => {
     width: 35px;
     height: 35px;
     padding: 6px;
-  }
-
-  /* 二维码弹窗优化 */
-  .qrcode-container {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0;
-    z-index: 9999;
-    background-color: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
-  }
-
-  .qrcode-image {
-    width: 180px;
-    height: 180px;
-  }
-
-  /* 遮罩层 */
-  .qrcode-container::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 9998;
   }
 
   /* 个人信息部分适配 */
