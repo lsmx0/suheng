@@ -91,13 +91,10 @@ onMounted(() => {
     <!-- 第一部分：照片 -->
     <section class="photo-section" :class="{ 'visible': photoVisible }">
       <div class="photo-container">
-        <!-- 左侧二维码 -->
-        <div class="qrcode-side left">
-          <div class="qrcode-item">
-            <div class="qrcode-icon">
-              <img :src="qqIcon" alt="QQ图标" class="icon-image" />
-            </div>
-            <div class="qrcode-label">QQ</div>
+        <!-- 左侧QQ -->
+        <div class="social-icon left">
+          <div class="icon-wrapper">
+            <img :src="qqIcon" alt="QQ图标" class="icon-image" />
             <div class="qrcode-container">
               <img :src="qqQRCode" alt="QQ二维码" class="qrcode-image" />
             </div>
@@ -109,13 +106,10 @@ onMounted(() => {
           <img :src="profilePhoto" alt="个人照片" class="profile-photo" />
         </div>
 
-        <!-- 右侧二维码 -->
-        <div class="qrcode-side right">
-          <div class="qrcode-item">
-            <div class="qrcode-icon">
-              <img :src="weixinIcon" alt="微信图标" class="icon-image" />
-            </div>
-            <div class="qrcode-label">微信</div>
+        <!-- 右侧微信 -->
+        <div class="social-icon right">
+          <div class="icon-wrapper">
+            <img :src="weixinIcon" alt="微信图标" class="icon-image" />
             <div class="qrcode-container">
               <img :src="weixinQRCode" alt="微信二维码" class="qrcode-image" />
             </div>
@@ -201,7 +195,11 @@ onMounted(() => {
 .photo-container {
   display: flex;
   align-items: center;
-  gap: 40px;
+  justify-content: center;
+  position: relative;
+  width: 600px;
+  height: 300px;
+  margin: 0 auto;
 }
 
 .photo-wrapper {
@@ -213,6 +211,7 @@ onMounted(() => {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   border: 8px solid white;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 2;
 }
 
 .photo-wrapper:hover {
@@ -231,31 +230,36 @@ onMounted(() => {
   transform: scale(1.08);
 }
 
-/* 二维码侧边样式 */
-.qrcode-side {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
+/* 社交图标样式 */
+.social-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
 }
 
-.qrcode-item {
-  text-align: center;
+.social-icon.left {
+  left: 0;
+}
+
+.social-icon.right {
+  right: 0;
+}
+
+.icon-wrapper {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
-.qrcode-item:hover {
-  transform: translateY(-5px);
-}
-
-.qrcode-icon {
-  width: 40px;
-  height: 40px;
-  margin: 0 auto 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.icon-wrapper:hover {
+  transform: scale(1.1);
 }
 
 .icon-image {
@@ -264,31 +268,38 @@ onMounted(() => {
   object-fit: contain;
 }
 
-.qrcode-label {
-  font-size: 16px;
-  color: #2c3e50;
-  font-weight: 500;
-  margin-bottom: 10px;
-}
-
 .qrcode-container {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   background-color: white;
-  padding: 15px;
-  border-radius: 10px;
+  padding: 10px;
+  border-radius: 8px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   opacity: 0;
-  transform: scale(0.8);
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 10;
 }
 
-.qrcode-item:hover .qrcode-container {
+.social-icon.left .qrcode-container {
+  right: 100%;
+  margin-right: 20px;
+}
+
+.social-icon.right .qrcode-container {
+  left: 100%;
+  margin-left: 20px;
+}
+
+.icon-wrapper:hover .qrcode-container {
   opacity: 1;
-  transform: scale(1);
+  visibility: visible;
 }
 
 .qrcode-image {
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 120px;
   border-radius: 5px;
   display: block;
 }
@@ -595,7 +606,7 @@ onMounted(() => {
     gap: 20px;
   }
 
-  .qrcode-side {
+  .qrcode-container {
     flex-direction: row;
     gap: 30px;
   }
