@@ -180,6 +180,7 @@ onMounted(() => {
   font-family: 'Helvetica Neue', Arial, sans-serif;
   color: #333;
   line-height: 1.6;
+  background-color: #FFF0F5;
 }
 
 /* 照片部分样式 */
