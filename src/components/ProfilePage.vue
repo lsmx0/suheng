@@ -2,7 +2,7 @@
 // 导入需要的Vue功能
 import { ref, onMounted } from 'vue';
 // 导入图片资源
-import profilePhoto from '../assets/suheng.jpg';
+import profilePhoto from '../assets/suheng1.jpg';
 import qqQRCode from '../assets/QQ.jpg';
 import weixinQRCode from '../assets/weixin.jpg';
 import qqIcon from '../assets/QQ.png';
@@ -37,7 +37,7 @@ const achievements = ref([
   },
   {
     id: 4,
-    year: '2034',
+    year: '2023',
     title: '加入河南科技大学',
     description: '高考以优异的成绩考入河南科技大学软件工程专业，开始了自己的大学生活。'
   }
