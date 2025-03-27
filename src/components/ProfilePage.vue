@@ -309,6 +309,18 @@ onMounted(() => {
 
 /* 手机端二维码样式 */
 @media (max-width: 768px) {
+  /* 遮罩层 */
+  .qrcode-container::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+  }
+
   .qrcode-container {
     position: fixed;
     top: 50%;
@@ -329,21 +341,16 @@ onMounted(() => {
     display: block;
   }
 
-  /* 遮罩层 */
-  .qrcode-container::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 9998;
-  }
-
   .qrcode-container.show {
     opacity: 1;
     visibility: visible;
+  }
+
+  /* 确保其他元素不会遮挡二维码 */
+  .photo-wrapper,
+  .social-icon,
+  .icon-wrapper {
+    z-index: 1;
   }
 }
 
