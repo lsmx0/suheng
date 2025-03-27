@@ -167,7 +167,7 @@ onMounted(() => {
     <!-- 页脚信息 -->
     <footer class="profile-footer">
       <p>© {{ new Date().getFullYear() }} {{ personalInfo.name }} - 个人简介页</p>
-      <p>基于 Vue 3 + Vite 构建</p>
+      <p>by LSMX</p>
     </footer>
   </div>
 </template>
